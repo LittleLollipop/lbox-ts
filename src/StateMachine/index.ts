@@ -30,7 +30,7 @@ export class StateMachine {
     
     public running: boolean = false
 
-    private stateNow: State | undefined
+    public stateNow: State | undefined
 
     constructor (smi: StateMachineInterface, stateMap: StateMap) {
         this.smi = smi

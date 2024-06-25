@@ -1,5 +1,5 @@
-import { StateMachine, StateMachineInterface, StateMap } from "./StateMachine";
-export { StateMachineInterface, StateMachine, StateMap}
+import { StateMachine, StateMachineInterface, StateMap, State } from "./StateMachine";
+export { StateMachineInterface, StateMachine, StateMap, State}
 
 
 import { Mission, StepDisposer } from "./Mission";

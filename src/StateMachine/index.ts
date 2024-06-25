@@ -78,11 +78,16 @@ export class StateMachine {
         const canChange = await this.smi.checkStateChange(this.stateNow, newState)
 
         if (canChange) {
-            await this.stateNow?.stateOut()
-
+            const outStatus = await this.stateNow?.stateOut()
+            if (outStatus == false) {
+                throw new Error(`stateOut failed: ${this.stateNow.name}, next state: ${stateName}`);
+            }
             this.stateNow = newState
 
-            await this.stateNow?.stateIn()
+            const inStatus = await this.stateNow?.stateIn()
+            if (inStatus == false) {
+                throw new Error(`stateIn failed: ${this.stateNow.name}`);
+            }
         }
     }
 }

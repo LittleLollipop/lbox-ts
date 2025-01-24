@@ -1,4 +1,4 @@
-import { valve } from './index'
+import { valve } from '../dist/index'
 
 test('open valve', () => {
 

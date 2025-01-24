@@ -1,4 +1,4 @@
-import { machine, State } from ".";
+import { machine, State } from "../dist/index";
 
 test('state out', async () => {
     let stateOut = false

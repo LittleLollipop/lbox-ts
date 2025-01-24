@@ -32,6 +32,8 @@ export class StateMachine {
 
     public stateNow: State | undefined
 
+    public stateLast: State | undefined
+
     constructor (smi: StateMachineInterface, stateMap: StateMap) {
         this.smi = smi
 
@@ -82,12 +84,15 @@ export class StateMachine {
             if (outStatus == false) {
                 throw new Error(`stateOut failed: ${this.stateNow.name}, next state: ${stateName}`);
             }
+            this.stateLast = this.stateNow
             this.stateNow = newState
 
             const inStatus = await this.stateNow?.stateIn()
             if (inStatus == false) {
                 throw new Error(`stateIn failed: ${this.stateNow.name}`);
             }
+
+            this.stateLast = undefined
         }
     }
 }

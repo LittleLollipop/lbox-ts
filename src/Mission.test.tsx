@@ -1,4 +1,4 @@
-import { Mission, mission } from './index'
+import { Mission, mission } from '../dist/index'
 
 test('run', async () => {
 
@@ -15,6 +15,36 @@ test('run', async () => {
             stepName: 'step2',
             dispose: async (mission: Mission, tags: any[]) => {
                 step2 = true
+            }
+        }
+    ]).start()
+
+    await sleep(500)
+    
+    expect(step2).toBe(true)
+    
+    
+})
+
+test('tags', async () => {
+
+    let step2 = false
+
+    mission.create([
+        {
+            stepName: 'step1',
+            dispose: async (mission: Mission, tags: any[]) => {
+                tags[0] = true
+                mission.goNext()
+            }
+        },
+        {
+            stepName: 'step2',
+            dispose: async (mission: Mission, tags: any[]) => {
+                if (tags[0] == true) {
+                    step2 = true
+                }
+                
             }
         }
     ]).start()
